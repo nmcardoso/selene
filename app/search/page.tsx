@@ -19,7 +19,6 @@ const downloadImage = async ({ra, dec, r50, mag_r}: {ra: string | number, dec: s
   if (!!r50 && !!mag_r) {
     pixscale = computePixScale(mag_r, r50, 300)
   }
-  console.log(pixscale)
   const url = `http://localhost:44777/cutout.jpg?ra=${ra}&dec=${dec}&size=300&pixscale=${pixscale}`
   const resp = await axios.get(url, {responseType: 'blob'})
   return URL.createObjectURL(resp.data)
@@ -30,11 +29,11 @@ function Search() {
   const searchParams = useSearchParams()
   const obj = searchParams.get('obj')
 
-  const { data: queryData, isSuccess, isError, isLoading } = useObjectSimilarity(obj, { limit: 51 })
+  const { data: queryData, isSuccess, isError, isLoading } = useObjectSimilarity(obj, { limit: 60 })
   
   const { semaphore } = useSemaphore({
     data: queryData?.similarity?.result, 
-    concurrency: 4,
+    concurrency: 6,
     handler: downloadImage,
   })
 
