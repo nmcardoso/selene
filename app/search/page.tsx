@@ -2,7 +2,7 @@
 'use client'
 
 import { useSearchParams } from "next/navigation"
-import { Container, Divider, ImageList, ImageListItem, Skeleton, Typography } from "@mui/material"
+import { Container, Divider, ImageList, ImageListItem, Skeleton, Typography, useMediaQuery } from "@mui/material"
 import HeaderToolbar from '@/components/HeaderToolbar'
 import client from "@/api/client"
 import { useSemaphore } from "@/hooks/useSemaphore"
@@ -38,6 +38,7 @@ function Search() {
   })
 
   const searchResult = queryData?.similarity?.result || Array(24).fill(undefined).map((_, i) => { return {id: i} })
+  const matches = useMediaQuery('(min-width:800px)')
 
   return <>
     <HeaderToolbar logo searchBar container elevation={2} sx={{mb: 3}} />
@@ -52,9 +53,9 @@ function Search() {
       <Divider />
       {
         (isSuccess || isLoading) && searchResult.length > 0 ? (
-          <ImageList sx={{ width: '100%'}} cols={6} rowHeight={200}>
+          <ImageList sx={{ width: '100%'}} cols={matches ? 6 : 4} rowHeight={200}>
             {searchResult.map((item: ObjectInfo, index: number) => (
-              <ImageListItem key={item.id} sx={{borderRadius: 2}}>
+              <ImageListItem key={item.id} sx={{borderRadius: 2, p: '4px'}}>
                 {
                   semaphore?.output?.[index] ? (
                     <img 
