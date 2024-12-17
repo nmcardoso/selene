@@ -17,18 +17,18 @@ import { NameSolverResponse, ObjectSearchResponse } from "@/interfaces/api";
 import { computePixScale } from "@/utils/pixscale";
 
 
-function ExternalServiceChip({href, label, sx}: {href: string, label: string, sx?: SxProps}) {
+function ExternalServiceChip({ href, label, sx }: { href: string, label: string, sx?: SxProps }) {
   return (
     <Typography component="div">
       <Link href={href} underline="none" target="_blank">
         <Tooltip title={`Open object in ${label}`}>
-          <Chip 
-            size="small" 
-            label={label} 
+          <Chip
+            size="small"
+            label={label}
             sx={sx}
-            deleteIcon={<OpenInNewIcon />} 
-            onDelete={() => {}} 
-            onClick={() => {}} 
+            deleteIcon={<OpenInNewIcon />}
+            onDelete={() => { }}
+            onClick={() => { }}
           />
         </Tooltip>
       </Link>
@@ -37,31 +37,31 @@ function ExternalServiceChip({href, label, sx}: {href: string, label: string, sx
 }
 
 
-function QueryRow({obj}: {obj?: string | null}) {
+function QueryRow({ obj }: { obj?: string | null }) {
   return (
-    <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 0.75}}>
-      <ImageSearchIcon fontSize="small" sx={{mr: 1}} />
+    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 0.75 }}>
+      <ImageSearchIcon fontSize="small" sx={{ mr: 1 }} />
       <Typography component="span" mr={5}>
         <b>Query:</b>
       </Typography>
       <Typography component="span" mr={1}>
         {obj}
       </Typography>
-      { 
-        obj && <ExternalServiceChip 
-          label="CDS" 
-          sx={{mr: 1}}
+      {
+        obj && <ExternalServiceChip
+          label="CDS"
+          sx={{ mr: 1 }}
           href={`http://cdsportal.u-strasbg.fr/?target=${encodeURIComponent(obj)}`} />
       }
-      { 
-        obj && <ExternalServiceChip 
+      {
+        obj && <ExternalServiceChip
           label="Simbad"
-          sx={{mr: 1}} 
+          sx={{ mr: 1 }}
           href={`http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(obj.toUpperCase())}`} />
       }
-      { 
-        obj && <ExternalServiceChip 
-          label="NED" 
+      {
+        obj && <ExternalServiceChip
+          label="NED"
           href={`https://ned.ipac.caltech.edu/cgi-bin/objsearch?extend=no&hconst=73&omegam=0.27&omegav=0.73&corr_z=1&out_csys=Equatorial&out_equinox=J2000.0&obj_sort=RA+or+Longitude&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&objname=${encodeURIComponent(obj.toUpperCase())}`} />
       }
     </Box>
@@ -69,11 +69,11 @@ function QueryRow({obj}: {obj?: string | null}) {
 }
 
 
-function PositionRow({ns}: {ns?: NameSolverResponse}) {
+function PositionRow({ ns }: { ns?: NameSolverResponse }) {
   if (ns?.ra && ns?.dec) {
     return (
-      <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 0.75}}>
-        <PlaceIcon fontSize="small" sx={{mr: 1}} />
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 0.75 }}>
+        <PlaceIcon fontSize="small" sx={{ mr: 1 }} />
         <Typography component="span" mr={3}>
           <b>Position:</b>
         </Typography>
@@ -84,13 +84,13 @@ function PositionRow({ns}: {ns?: NameSolverResponse}) {
     )
   }
   return (
-    <Skeleton width="90%" animation="wave" variant="rounded" sx={{my: 1.75}} />
+    <Skeleton width="90%" animation="wave" variant="rounded" sx={{ my: 1.75 }} />
   )
 }
 
 
 
-function MorphologicalTypeRow({ns}: {ns?: NameSolverResponse}) {
+function MorphologicalTypeRow({ ns }: { ns?: NameSolverResponse }) {
   let type = ''
   if (ns?.otype) type += ns.otype
   if (ns?.otype_info) type += ' (' + ns.otype_info + ')'
@@ -98,8 +98,8 @@ function MorphologicalTypeRow({ns}: {ns?: NameSolverResponse}) {
   if (!type) type = 'undefined'
   if (ns?.ra && ns?.dec) {
     return (
-      <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-        <ShapeLineIcon fontSize="small" sx={{mr: 1}} />
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+        <ShapeLineIcon fontSize="small" sx={{ mr: 1 }} />
         <Typography component="span" mr={1.1}>
           <b>Taxonomy:</b>
         </Typography>
@@ -117,17 +117,17 @@ function MorphologicalTypeRow({ns}: {ns?: NameSolverResponse}) {
 
 
 
-function SearchCountRow({count, isLoading}: {count?: number, isLoading?: boolean}) {
+function SearchCountRow({ count, isLoading }: { count?: number, isLoading?: boolean }) {
   return (
     <>
       {
         isLoading ? (
           <Skeleton width="30%" animation="wave" />
         ) : (
-          <Typography variant="body2" sx={{mt: 1}}>
+          <Typography variant="body2" sx={{ mt: 1 }}>
             <i>Searched {numberSeparator(count)} objects</i>
           </Typography>
-        ) 
+        )
       }
     </>
   )
@@ -136,32 +136,32 @@ function SearchCountRow({count, isLoading}: {count?: number, isLoading?: boolean
 
 
 function QueryTimeRow({
-  title, 
-  icon, 
-  time, 
-  qSuccess, 
+  title,
+  icon,
+  time,
+  qSuccess,
   qLoading,
   skeletonWidth
 }: {
-  title: string, 
-  icon: any, 
+  title: string,
+  icon: any,
   time: number
-  qSuccess?: boolean, 
+  qSuccess?: boolean,
   qLoading?: boolean,
-  skeletonWidth: string | number, 
+  skeletonWidth: string | number,
 }) {
   if (qLoading) {
     return (
-    <Skeleton 
-      width={skeletonWidth} 
-      variant="rounded" 
-      animation="wave" 
-      sx={{mb: 1.5}} />
+      <Skeleton
+        width={skeletonWidth}
+        variant="rounded"
+        animation="wave"
+        sx={{ mb: 1.5 }} />
     )
   }
   const color = time > 10000 ? 'error' : (time < 3000 ? 'success' : 'warning')
   return (
-    <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 1}}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 1 }}>
       {icon}
       <Typography component="span" mr={1.5} ml={1}>
         {title}
@@ -174,15 +174,15 @@ function QueryTimeRow({
               icon={<AccessTimeIcon />}
               label="0ms | cached"
               color="primary"
-              onClick={() => {}}
+              onClick={() => { }}
             />
           ) : (
-            <Chip 
-              size="small" 
-              icon={<AccessTimeIcon />} 
-              label={`${round(time, 0)}ms`} 
+            <Chip
+              size="small"
+              icon={<AccessTimeIcon />}
+              label={`${round(time, 0)}ms`}
               color={color}
-              onClick={() => {}}
+              onClick={() => { }}
             />
           )
         }
@@ -193,14 +193,14 @@ function QueryTimeRow({
 
 
 
-function HeaderRow({title, icon}: {title: string, icon: 'info' | 'stat'}) {
+function HeaderRow({ title, icon }: { title: string, icon: 'info' | 'stat' }) {
   return (
-    <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
       {
         icon === 'info' ? (
-          <InfoIcon fontSize="small" sx={{mr: 1}} /> 
+          <InfoIcon fontSize="small" sx={{ mr: 1 }} />
         ) : (
-          <QueryStatsIcon fontSize="small" sx={{mr: 1}} />
+          <QueryStatsIcon fontSize="small" sx={{ mr: 1 }} />
         )
       }
       <Typography component="span">
@@ -219,66 +219,65 @@ interface SearchSummaryCardProps {
   qLoading?: boolean
 }
 
-export default function SearchSummaryCard({obj, qResult, qSuccess, qError, qLoading}: SearchSummaryCardProps) {
+export default function SearchSummaryCard({ obj, qResult, qSuccess, qError, qLoading }: SearchSummaryCardProps) {
   let pixscale = 0.15
   if (!!qResult?.conesearch.mag_r && !!qResult.conesearch.r50) {
     pixscale = computePixScale(qResult?.conesearch.mag_r, qResult?.conesearch.r50, 300)
   }
   return (
-    <Card elevation={2} sx={{display: 'flex'}}>
-      {
-        qResult?.namesolver.ra && qResult.namesolver.dec ? (
-          <CardMedia
-            component="img"
-            sx={{width: 183, height: 183}}
-            image={`https://www.legacysurvey.org/viewer/cutout.jpg?ra=${qResult.namesolver.ra}&dec=${qResult.namesolver.dec}&size=300&pixscale=${pixscale}&layer=ls-dr10-grz`}
-            alt=""
-          />
-        ) : (
-          <Skeleton variant="rectangular" width="183px" height="183px" animation="wave" />
-        )
-      }
-      <CardContent sx={{width: '100%'}} style={{paddingBottom: '16px'}}>
-        <Grid container sx={{width: '100%'}} columnSpacing={2}>
-          <Grid item xs={12} md={8}>
-            <Stack>
-              <HeaderRow title="Object Info" icon="info" />
-              <Divider sx={{mb: 1, pt: 0.25}} />
-              <QueryRow obj={obj} />
-              <PositionRow ns={qResult?.namesolver} />
-              {/* <MorphologicalTypeRow ns={qResult?.namesolver} /> */}
-              <SearchCountRow count={qResult?.count} isLoading={qLoading} />
-            </Stack>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Stack>
-              <HeaderRow title="Query Latency" icon="stat" />
-              <Divider sx={{mb: 1, pt: 0.25}} />
-              <QueryTimeRow 
-                title="Name solver" 
-                qSuccess={qSuccess}
-                qLoading={qLoading}
-                time={qResult?.namesolver?.time_ms || 0}
-                icon={<FingerprintIcon fontSize="small" />}
-                skeletonWidth="80%" />
-              <QueryTimeRow 
-                title="Crossmatch" 
-                qSuccess={qSuccess}
-                qLoading={qLoading}
-                time={qResult?.conesearch.time_ms || 0}
-                icon={<JoinInnerIcon fontSize="small" />}
-                skeletonWidth="75%" />
-              <QueryTimeRow 
-                title="Similarity search" 
-                qSuccess={qSuccess}
-                qLoading={qLoading}
-                time={qResult?.similarity.time_ms || 0}
-                icon={<CompareIcon fontSize="small" />}
-                skeletonWidth="85%" />
-            </Stack>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+    <>
+      <Card elevation={2} sx={{ display: 'flex' }}>
+        {
+          qResult?.namesolver.ra && qResult.namesolver.dec ? (
+            <CardMedia
+              component="img"
+              sx={{ width: 183, height: 183 }}
+              image={`https://www.legacysurvey.org/viewer/cutout.jpg?ra=${qResult.namesolver.ra}&dec=${qResult.namesolver.dec}&size=300&pixscale=${pixscale}&layer=ls-dr10-grz`}
+              alt=""
+            />
+          ) : (
+            <Skeleton variant="rectangular" width="183px" height="183px" animation="wave" />
+          )
+        }
+        <CardContent sx={{ width: '100%' }} style={{ paddingBottom: '16px' }}>
+          <Stack>
+            <HeaderRow title="Object Info" icon="info" />
+            <Divider sx={{ mb: 1, pt: 0.25 }} />
+            <QueryRow obj={obj} />
+            <PositionRow ns={qResult?.namesolver} />
+            {/* <MorphologicalTypeRow ns={qResult?.namesolver} /> */}
+            <SearchCountRow count={qResult?.count} isLoading={qLoading} />
+          </Stack>
+        </CardContent>
+      </Card>
+
+      <Paper sx={{mt: 2, p: 2}} elevation={2}>
+        <Stack>
+          <HeaderRow title="Query Latency" icon="stat" />
+          <Divider sx={{ mb: 1, pt: 0.25 }} />
+          <QueryTimeRow
+            title="Name solver"
+            qSuccess={qSuccess}
+            qLoading={qLoading}
+            time={qResult?.namesolver?.time_ms || 0}
+            icon={<FingerprintIcon fontSize="small" />}
+            skeletonWidth="80%" />
+          <QueryTimeRow
+            title="Crossmatch"
+            qSuccess={qSuccess}
+            qLoading={qLoading}
+            time={qResult?.conesearch.time_ms || 0}
+            icon={<JoinInnerIcon fontSize="small" />}
+            skeletonWidth="75%" />
+          <QueryTimeRow
+            title="Similarity search"
+            qSuccess={qSuccess}
+            qLoading={qLoading}
+            time={qResult?.similarity.time_ms || 0}
+            icon={<CompareIcon fontSize="small" />}
+            skeletonWidth="85%" />
+        </Stack>
+      </Paper>
+    </>
   )
 }
