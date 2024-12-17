@@ -124,7 +124,7 @@ async def cutout(
   size: int = None, 
   width: int = None, 
   height: int = None,
-  layer: str = 'ls-dr10',
+  layer: str = 'ls-dr10-grz',
 ):
   if size is not None:
     width, height = size, size
