@@ -15,7 +15,7 @@ import { computePixScale } from "@/utils/pixscale"
 
 
 const downloadImage = async ({ra, dec, r50, mag_r}: {ra: string | number, dec: string | number, r50: number, mag_r: number}) => {
-  let pixscale = 0.20
+  let pixscale = 0.22
   if (!!r50 && !!mag_r) {
     pixscale = computePixScale(mag_r, r50, 300)
   }

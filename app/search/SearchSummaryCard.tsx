@@ -220,7 +220,7 @@ interface SearchSummaryCardProps {
 }
 
 export default function SearchSummaryCard({ obj, qResult, qSuccess, qError, qLoading }: SearchSummaryCardProps) {
-  let pixscale = 0.15
+  let pixscale = 0.22
   if (!!qResult?.conesearch.mag_r && !!qResult.conesearch.r50) {
     pixscale = computePixScale(qResult?.conesearch.mag_r, qResult?.conesearch.r50, 300)
   }
