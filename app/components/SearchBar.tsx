@@ -15,29 +15,29 @@ export default function SearchBar(
 ) {
   return (
     <Paper
-        component="form"
-        sx={{
-          display: 'flex', 
-          alignItems: 'center', 
-          width: 400, 
-          borderRadius: "50px", 
-          ...sx 
-        }}
-        elevation={elevation}
-        action="/search"
-        // onSubmit={handleSubmit}
-      >
-        <IconButton sx={{ p: '10px' }}>
-          <SearchIcon />
-        </IconButton>
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Galaxy name or position"
-            name="obj"
-          />
-        <IconButton type="submit" sx={{ p: '10px' }}>
-          <SendIcon />
-        </IconButton>
-      </Paper>
+      component="form"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        width: 400,
+        borderRadius: "50px",
+        ...sx
+      }}
+      elevation={elevation}
+      action="/search"
+    // onSubmit={handleSubmit}
+    >
+      <IconButton sx={{ p: '8px' }}>
+        <SearchIcon />
+      </IconButton>
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Galaxy name or position"
+        name="obj"
+      />
+      <IconButton type="submit" sx={{ p: '8px' }}>
+        <SendIcon />
+      </IconButton>
+    </Paper>
   )
 }
