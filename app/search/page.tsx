@@ -4,7 +4,7 @@
 import { useSearchParams } from "next/navigation"
 import { Container, Divider, ImageList, ImageListItem, Skeleton, Typography } from "@mui/material"
 import HeaderToolbar from '@/components/HeaderToolbar'
-import axios from "axios"
+import client from "@/api/client"
 import { useSemaphore } from "@/hooks/useSemaphore"
 import SearchSummaryCard from "./SearchSummaryCard"
 import { useObjectSimilarity } from '@/api/useObjectSimilarity'
@@ -15,12 +15,12 @@ import { computePixScale } from "@/utils/pixscale"
 
 
 const downloadImage = async ({ra, dec, r50, mag_r}: {ra: string | number, dec: string | number, r50: number, mag_r: number}) => {
-  let pixscale = 0.15
+  let pixscale = 0.20
   if (!!r50 && !!mag_r) {
     pixscale = computePixScale(mag_r, r50, 300)
   }
-  const url = `http://localhost:44777/cutout.jpg?ra=${ra}&dec=${dec}&size=300&pixscale=${pixscale}`
-  const resp = await axios.get(url, {responseType: 'blob'})
+  const url = `/cutout.jpg?ra=${ra}&dec=${dec}&size=300&pixscale=${pixscale}`
+  const resp = await client.get(url, {responseType: 'blob'})
   return URL.createObjectURL(resp.data)
 }
 
