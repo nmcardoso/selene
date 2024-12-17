@@ -53,7 +53,7 @@ function Search() {
       <Divider />
       {
         (isSuccess || isLoading) && searchResult.length > 0 ? (
-          <ImageList sx={{ width: '100%'}} cols={matches ? 6 : 4} rowHeight={200}>
+          <ImageList sx={{ width: '100%'}} cols={matches ? 6 : 4} rowHeight={matches ? 200 : 170}>
             {searchResult.map((item: ObjectInfo, index: number) => (
               <ImageListItem key={item.id} sx={{borderRadius: 2, p: '4px'}}>
                 {
